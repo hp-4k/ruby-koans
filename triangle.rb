@@ -14,7 +14,25 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  raise TriangleError unless sides_greater_than_0?(a, b, c) 
+  raise TriangleError unless proper_triangle?(a, b, c) 
+
+  if a == b && b == c
+    :equilateral
+  elsif a == b || b == c || c == a
+    :isosceles
+  else
+    :scalene
+  end
+end
+
+def sides_greater_than_0?(a, b, c)
+   a >= 0 && b >= 0 && c >= 0
+end
+
+def proper_triangle?(a, b, c)
+  longest_side = [a,b,c].max
+  longest_side < [a,b,c].inject(:+) - longest_side
 end
 
 # Error class used in part 2.  No need to change this code.
